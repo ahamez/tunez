@@ -1,5 +1,17 @@
 defmodule Tunez.Music.Artist do
-  use Ash.Resource, otp_app: :tunez, domain: Tunez.Music, data_layer: AshPostgres.DataLayer
+  use Ash.Resource,
+    otp_app: :tunez,
+    domain: Tunez.Music,
+    data_layer: AshPostgres.DataLayer,
+    extensions: [AshJsonApi.Resource]
+
+  json_api do
+    type "artist"
+
+    # All albums will always be included.
+    # includes [:albums]
+    # Another possibility is to use the related option in section json_api of Tunez.Music.
+  end
 
   postgres do
     table "artists"
@@ -8,6 +20,10 @@ defmodule Tunez.Music.Artist do
     custom_indexes do
       index "name gin_tgrm_ops", name: "artists_name_gin_index", using: "GIN"
     end
+  end
+
+  resource do
+    description "A person or group of people that 🎶"
   end
 
   actions do
@@ -20,6 +36,8 @@ defmodule Tunez.Music.Artist do
     end
 
     read :search do
+      description "List artists, optionally filtering by name"
+
       argument :query, :ci_string do
         constraints allow_empty?: true
         default ""
@@ -50,9 +68,12 @@ defmodule Tunez.Music.Artist do
 
     attribute :previous_names, {:array, :string} do
       default []
+      public? true
     end
 
-    attribute :biography, :string
+    attribute :biography, :string do
+      public? true
+    end
 
     create_timestamp :inserted_at, public?: true
     update_timestamp :updated_at, public?: true
@@ -61,6 +82,7 @@ defmodule Tunez.Music.Artist do
   relationships do
     has_many :albums, Tunez.Music.Album do
       sort year_released: :desc
+      public? true
     end
   end
 
