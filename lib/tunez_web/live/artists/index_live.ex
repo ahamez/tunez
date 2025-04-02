@@ -6,7 +6,9 @@ defmodule TunezWeb.Artists.IndexLive do
   @sort_options [
     {"recently updated", "-updated_at"},
     {"recently added", "-inserted_at"},
-    {"name", "name"}
+    {"name", "name"},
+    {"number of albums", "-album_count"},
+    {"latest album release", "--latest_album_year_released"}
   ]
 
   @valid_sort_keys Enum.map(@sort_options, &elem(&1, 1))
@@ -26,7 +28,8 @@ defmodule TunezWeb.Artists.IndexLive do
     artists_page =
       Tunez.Music.search_artists!(query_text,
         page: artists_page_params,
-        query: [sort_input: sort_by]
+        query: [sort_input: sort_by],
+        load: [:album_count, :latest_album_year_released, :cover_image_url]
       )
 
     socket =
@@ -86,7 +89,7 @@ defmodule TunezWeb.Artists.IndexLive do
     ~H"""
     <div id={"artist-#{@artist.id}"} data-role="artist-card" class="relative mb-2">
       <.link navigate={~p"/artists/#{@artist.id}"}>
-        <.cover_image />
+        <.cover_image image={@artist.cover_image_url} />
       </.link>
     </div>
     <p>
@@ -98,6 +101,7 @@ defmodule TunezWeb.Artists.IndexLive do
         {@artist.name}
       </.link>
     </p>
+    <.artist_card_album_info artist={@artist} />
     """
   end
 
