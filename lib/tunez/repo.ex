@@ -4,7 +4,7 @@ defmodule Tunez.Repo do
 
   def installed_extensions do
     # Add extensions here, and the migration generator will install them.
-    ["ash-functions"]
+    ["ash-functions", "pg_trgm"]
   end
 
   # Don't open unnecessary transactions
@@ -14,6 +14,6 @@ defmodule Tunez.Repo do
   end
 
   def min_pg_version do
-    %Version{major: 14, minor: 17, patch: 0}
+    %Version{major: 15, minor: 12, patch: 0}
   end
 end
