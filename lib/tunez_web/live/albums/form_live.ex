@@ -136,7 +136,7 @@ defmodule TunezWeb.Albums.FormLive do
       case AshPhoenix.Form.submit(socket.assigns.form, params: form_data) do
         {:ok, album} ->
           socket
-          |> put_flash(:info, "Album saved sucesssfully")
+          |> put_flash(:info, "Album saved successfully")
           |> push_navigate(to: ~p"/artists/#{album.artist_id}")
 
         {:error, form} ->
