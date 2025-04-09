@@ -88,7 +88,7 @@ defmodule Tunez.MixProject do
       seed: [
         "run priv/repo/seeds/01-artists.exs",
         "run priv/repo/seeds/02-albums.exs"
-        # "run priv/repo/seeds/08-tracks.exs"
+        "run priv/repo/seeds/08-tracks.exs"
       ],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ash.setup --quiet", "test"],
