@@ -22,7 +22,7 @@ defmodule Tunez.Music.Artist do
     repo Tunez.Repo
 
     custom_indexes do
-      index "name gin_tgrm_ops", name: "artists_name_gin_index", using: "GIN"
+      index "name gin_trgm_ops", name: "artists_name_gin_index", using: "GIN"
     end
   end
 
