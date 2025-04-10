@@ -12,6 +12,7 @@ defmodule Tunez.Music.Album do
 
   json_api do
     type "album"
+    includes [:tracks]
   end
 
   postgres do
@@ -112,6 +113,7 @@ defmodule Tunez.Music.Album do
 
     has_many :tracks, Tunez.Music.Track do
       sort order: :asc
+      public? true
     end
   end
 

@@ -9,8 +9,9 @@ defmodule Tunez.Music.Artist do
   json_api do
     type "artist"
 
-    # All albums will always be included.
-    # includes [:albums]
+    # All albums will be included when parameter `include=albums` is passed.
+    # Tracks will be included as well with the parameter `include=albums.tracks`.
+    includes albums: [:tracks]
     # Another possibility is to use the related option in section json_api of Tunez.Music.
   end
 
