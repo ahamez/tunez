@@ -118,6 +118,11 @@ defmodule Tunez.Music.Album do
   calculations do
     calculate :years_ago, :integer, expr(2025 - year_released)
     calculate :string_years_ago, :string, expr("This was released #{years_ago} years ago")
+    calculate :total_duration, :string, Tunez.Music.Calculations.SecondsToMinutes
+  end
+
+  aggregates do
+    sum :duration_seconds, :tracks, :duration_seconds
   end
 
   identities do

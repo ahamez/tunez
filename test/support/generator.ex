@@ -181,8 +181,7 @@ defmodule Tunez.Generator do
   end
 
   def track_input(_opts \\ []) do
-    raise "Uncomment the `track_input` generator content in `test/support/generator.ex` (and remove this line)"
-    # action_input(Tunez.Music.Track, :create, %{duration: duration()})
+    action_input(Tunez.Music.Track, :create, %{duration: duration()})
   end
 
   def duration do
