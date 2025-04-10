@@ -13,6 +13,8 @@ defmodule Tunez.Music.Artist do
     # Tracks will be included as well with the parameter `include=albums.tracks`.
     includes albums: [:tracks]
     # Another possibility is to use the related option in section json_api of Tunez.Music.
+
+    derive_filter? false
   end
 
   postgres do
