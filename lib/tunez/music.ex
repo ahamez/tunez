@@ -1,5 +1,9 @@
 defmodule Tunez.Music do
-  use Ash.Domain, otp_app: :tunez, extensions: [AshJsonApi.Domain, AshPhoenix]
+  use Ash.Domain, otp_app: :tunez, extensions: [AshAdmin.Domain, AshJsonApi.Domain, AshPhoenix]
+
+  admin do
+    show? true
+  end
 
   json_api do
     routes do
